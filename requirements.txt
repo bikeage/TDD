@@ -1,8 +1,1 @@
 Django==1.7
-distribute==0.6.49
-ecdsa==0.11
-el-nester==1.0.0
-nester==1.0.0
-paramiko==1.13.0
-pycrypto==2.6.1
-selenium==2.37.2
