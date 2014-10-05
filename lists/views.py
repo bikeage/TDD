@@ -1,15 +1,19 @@
 from django.shortcuts import redirect, render
 from lists.models import Item, List
+from django.utils.html import escape
 
 def home_page(request):
     return render(request, 'home.html')
 
-
 def new_list(request):
     list_ = List.objects.create()
-    Item.objects.create(text=request.POST['item_text'], list=list_)
+    item = Item.objects.create(text=request.POST['item_text'], list=list_)
+    try:
+        item.full_clean()
+    except ValidationError:
+        expected_error = escape("You can't have an empty list item")
+        self.assertContains(response, expected_error)
     return redirect('/lists/%d/' % (list_.id,))
-
 
 def add_item(request, list_id):
     list_ = List.objects.get(id=list_id)
